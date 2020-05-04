@@ -1,0 +1,35 @@
+{% extends 'mainapp/base.html' %}
+{% block content %}
+{% load static %}
+{% block style %}
+    <link rel="stylesheet" href="{% static 'assets/css/main.css' %}">
+{% endblock style %}
+    <div class="form-container" id="form-container">
+        <div class="wrapper col-lg-4 col-md-6 col-sm-12">
+            <div class="field-wrapper">
+                <h4 class="text-info text-center">Welcom back, please login</h4><hr>
+                {% for mss in messages %}
+                    <p id="err" class="text-danger">{{ mss }}</p>
+                {% endfor %}
+            </div>
+            <form action="" method="POST" id="r_form" autocomplete="off">
+                {% csrf_token %}
+                <div class="field-wrapper">
+                    <label for="username"><span class="glyphicon glyphicon-user"></span>User Name:</label>
+                    <input type="text" name="username" id="username" class="text-field-input">
+                </div>
+            
+                <div class="field-wrapper">
+                    <label for="password">Password</label>
+                    <input type="password" name="password" id="password" class="text-field-input">
+                </div>
+            
+                
+                <div class="field-wrapper">
+                    <input type="submit" value="Login" class="btn btn-info">
+                    <h4 class="text-center text-info">Not yet a member? please <span><a href="{% url 'signup' %}">Sign Up here</a></span></h4>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock content %}

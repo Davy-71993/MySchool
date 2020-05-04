@@ -1,0 +1,53 @@
+{% extends 'mainapp/base.html' %}
+
+{% block content %}
+{% load static %}
+{% block style %}
+    <link rel="stylesheet" href="{% static 'assets/css/main.css' %}">
+{% endblock style %}
+    <div class="form-container" id="form-container">
+        <div class="wrapper col-lg-4 col-md-6 col-sm-12">
+            <div class="field-wrapper">
+                <h4 class="text-info text-center">Welcom, Please sign up</h4><hr>
+                {% for error in form.errors %}
+                    <p class="text-danger">{{ error.massege}}</p>
+                {% endfor %}
+            </div>
+            <form action="" method="POST" id="r_form" autocomplete="off">
+                {% csrf_token %}
+
+                <div class="field-wrapper">
+                    <label for="firstName">First Name:</label>
+                    <input type="text" name="first_name" id="firstName" class="text-field-input">
+                </div>
+                <div class="field-wrapper">
+                    <label for="lastName">Last Name:</label>
+                    <input type="text" name="last_name" id="lastName" class="text-field-input">
+                </div>
+
+                <div class="field-wrapper">
+                    <label for="username">User Name:</label>
+                    <input type="text" name="username" id="username" class="text-field-input">
+                </div>
+                <div class="field-wrapper">
+                    <label for="email">Email:</label>
+                    <input type="email" name="email" id="email" class="text-field-input">
+                </div>
+            
+                <div class="field-wrapper">
+                    <label for="password1">Password</label>
+                    <input type="password" name="password1" id="password1" class="text-field-input">
+                </div>
+                <div class="field-wrapper">
+                    <label for="password2">Confirm Password</label>
+                    <input type="password" name="password2" id="password2" class="text-field-input">
+                </div>
+            
+                <div class="field-wrapper">
+                    <input type="submit" value="Sign Up" class="btn btn-info">
+                    <h4 class="text-center text-info">Already a member? please <span><a href="{% url 'login' %}">Login here</a></span></h4>
+                </div> 
+            </form>
+        </div>
+    </div>
+{% endblock content %}

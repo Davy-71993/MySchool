@@ -1,0 +1,64 @@
+{% extends 'mainapp/home.html' %}
+
+{% block style %}
+    <style>
+        #subject-form{
+            max-width: 600px;
+            margin: 10px auto;
+        }
+    </style>
+{% endblock style %}
+
+{% block page %}
+<div class="form-container">
+    <div class="wrapper col-lg-8 col-md-10 col-sm-12">
+        <div class="card" id="subject-form">
+            <h4 class="card-header text-info text-center">You are  editting {{ instance }}</h4>
+            <div class="card-body">
+                <form action="" method="POST">
+                    {% csrf_token %}
+                    <fieldset>
+                        {% for field in form %}
+                            <div class="form-group">
+                                <label for="">{{ field.label }}</label>
+                                {{ field }}
+                            </div>
+                        {% endfor %}
+                    </fieldset><hr>
+
+                    <div class="form-group">
+                        <div class="h-gird-2">
+                            <a href="{% url 'subjects' %}" class="btn btn-outline-info">
+                                Cancel
+                            </a>
+                            <button type="submit" class="btn btn-outline-success">
+                                Save Changes
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div> 
+</div>
+{% endblock page %}
+
+{% block javascript %}
+<!-- the script to add a class to inputs and or selects -->
+    <script>
+        setName('input');
+        setName('select')
+        
+        function setName(elem) {
+            arr = document.getElementsByTagName(elem);
+            for (let i = 0; i < arr.length; i++) {
+                const element = arr[i];
+                // if the input type is text or password
+                if(element.type !== 'checkbox'){
+                    element.className = 'form-control';
+                }
+            }
+        }
+    </script>
+{% endblock javascript %}
+

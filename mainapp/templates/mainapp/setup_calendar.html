@@ -1,0 +1,70 @@
+{% extends 'mainapp/home.html' %}
+
+{% block style %}
+{% endblock style %}
+
+{% block page %}
+    <div class="container">
+        <h1 class="text-center text-info">Setup Calendar {{ calendar }}</h1><hr>
+        <div class="wrapper mb-5">
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="sider">
+                        <h2 class="text-center text-info">Actions</h2><hr>
+                        <a href="#"><h6 class="text-success card-header">Add an Event</h6></a>
+                    </div>
+                </div>
+                <div class="col-md-9" id="set">
+                    <form action="" method="POST">
+                        {% csrf_token %}
+                        <legend class="text-success text-center">Create an Event:</legend><hr>
+                        <fieldset class="ml-5">
+                            <legend></legend>
+                            <div class="form-group">
+                                <legend class="text-primary">Event Name: {{ name }}</legend>
+                                <input type="text" name="name" id="name" class="form-control"  placeholder="Event Name">
+                            </div>
+                            <hr>
+
+                            <div class="form-group">
+                                <legend class="text-primary">Event Description:</legend>
+                                <textarea name="description" id="des" class="form-control"></textarea>
+                            </div>
+                            <hr>
+
+                            <legend class="text-primary">Start:</legend>
+                            <div class="h-gird-3" style="grid-gap: 15px;">
+                                <div class="form-group">
+                                    <label for="s_date">Date:</label>
+                                    <input type="date" name="fro_date" id="s_date" class="form-control" >
+                                </div>
+                                <div class="form-group">
+                                    <label for="s_time">Time:</label>
+                                    <input type="time" name="fro_time" id="s_time" class="form-control" >
+                                </div>
+                            </div><hr>
+
+                            <legend class="text-primary">End:</legend>
+                            <div class="h-gird-3" style="grid-gap: 15px;">
+                                <div class="form-group">
+                                    <label for="e_date">Date:</label>
+                                    <input type="date" name="to_date" id="e_date" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label for="e_time">Time:</label>
+                                    <input type="time" name="to_time" id="e_time" class="form-control" >
+                                </div>
+                            </div>
+                        </fieldset>
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-outline-success">Submit</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock page %}
+
+{% block javascript %}
+{% endblock javascript %}

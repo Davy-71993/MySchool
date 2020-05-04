@@ -1,0 +1,66 @@
+{% extends 'mainapp/home.html' %}
+
+ {% block style %}
+    <style>
+        .t-e{
+            max-width: 400px;
+            margin: 10px auto;
+            padding: 3px 10px;
+            border: hotpink 1px solid;
+        }
+    </style>
+ {% endblock style %}
+    {% block page %}
+        <div class="container jumbotron">
+            <h1 class="text-center text-info">{{ calendar.year }} MYSCHOOL CALENDAR</h1>
+            <h4 class="text-center text-warning">{{ calendar.current_term }}</h4><hr>
+
+            <nav class="navbar navbar-expand pb-0 pt-0 navbar-light bg-light">
+                <ul class="navbar-nav nav-tabs mb-0 pb-0" style="border: none;">
+                    <li class="nav-item mb-0"><a class="nav-link" href="{% url 'calendar' %}?where=today">Today</a></li>
+                    <li class="nav-item mb-0"><a class="nav-link" href="{% url 'calendar' %}?where=week">This Week</a></li>
+                    <li class="nav-item mb-0"><a class="nav-link" href="{% url 'calendar' %}?where=month">This Month</a></li>
+                    <li class="nav-item mb-0"><a class="nav-link" href="{% url 'calendar' %}?where=term">This {% if 'Holidays' in calendar.current_term.name %}Holidays{% else %}Term{% endif %}</a></li>
+                    <li class="nav-item mb-0"><a class="nav-link" href="{% url 'calendar' %}?where=year">This Year</a></li>
+                </ul>
+            </nav>
+            {% if events %}
+            <div class="calendar">
+                <h3 class="text-center text-success">{% if target %} Events {{ target }} {% endif %}</h3><hr>
+                {% for event in events %}
+                    <div class="card mb-5">
+                        <div class="card-header pb-0 pt-0">
+                            <h4 class="text-primary ml-5">{{ event }}</h4>
+                        </div>
+                        <div class="card-body">
+                            <h6 class="ml-5 text-primary">
+                                Starts: {{ event.day }} {{ event.fro_date }} {{ event.fro_time }} 
+                                {% if event.fro_date != event.to_date %}
+                                    ------ Up To: {% if event.day != 'Today' %} {{ event.to_date }} {% endif %}  {{ event.to_time }}
+                                {% else %}
+                                    {% if event.fro_time != event.to_time %}
+                                    ------ Up To: {{ event.to_time }}
+                                    {% endif %}
+                                {% endif %}
+                            </h6><hr>
+                            <p class="ml-5 text-info">{{ event.description }}</p>
+                            {% if event.events %}
+                                {% for e in event.events %}
+                                    <div class="t-e">
+                                        <h6>{{ e.name }}: {{ e.fro_date }}</h6>
+                                        <p>{% if e.description %} {{ e.description }} {% endif %}</p>
+                                    </div><br>
+                                    
+                                {% endfor %}
+                            {% endif %}
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+            {% else %}
+                
+            {% endif %}
+        </div>
+    {% endblock page %}
+ {% block javascript %}
+ {% endblock javascript %}

@@ -1,0 +1,25 @@
+7th/04/2020
+    created the subjects
+
+
+8th/04/2020
+    1. Estabulish why the bottom scroll and find away of removing it
+    2. Complete the update, delete system on the subjects and papers
+    3. 
+
+
+
+
+11/04/2020:
+    1. The scores or marks should be handled in the student model with a method 
+    2. this methos will then be used in the marklist view to display the marks per student
+    3. Odder: => student.subject.paper.score
+                 this is if the we need to include papers and there is only one exam
+              => student.subject.m1 or m2 or m3.score
+
+
+
+ 23/04/2020:
+    We neeed to create a calendar which will be res[onsible for:
+        1. Tell us which year and term we are running
+        2. Sheckedule events                

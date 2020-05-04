@@ -1,0 +1,28 @@
+{% extends 'mainapp/home.html' %}
+
+{% block style %}
+{% endblock style %}
+{% block page %}
+    <div class="container">
+        <h1 class="text-center text-info">{{ head }}</h1><hr>
+        <div class="form-container">
+            <div class="wrapper col-md-4">
+                <h1 class="text-center text-info">Create a Calendar</h1><hr>
+                <form action="" method="POST">
+                    {% csrf_token %}
+                    <fieldset>
+                        <div class="form-sm">
+                            <label for="yr">Year:</label>
+                            <input type="number" name="year" id="yr" class="form-control" value="{{ yr }}" required>
+                        </div>
+                    </fieldset>
+                    <hr>
+                    <div class="form-group text-center">
+                        <button type="submit" class="btn btn-outline-success">Create</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock page %}
+{% block javascript %} {% endblock javascript %}

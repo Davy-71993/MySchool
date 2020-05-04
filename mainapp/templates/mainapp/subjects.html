@@ -1,0 +1,152 @@
+
+{% extends 'mainapp/home.html' %}
+
+{% block style %}
+    <style>
+        #subject-form{
+            max-width: 600px;
+            margin: auto;
+        }
+        .table{
+            margin: 10px auto;
+        }
+    </style>
+{% endblock style %}
+{% block page %}
+    <div class="row">
+        <div class="col-md-3">
+            <!-- Subject creation form -->
+            <div class="sider">
+                <div class="card" id="subject-form">
+                    <h4 class="card-header">Add New Subject</h4>
+                    <div class="card-body">
+                        <form action="" method="POST">
+                            {% csrf_token %}
+                            <fieldset>
+                                {% for field in subject_form %}
+                                    <div class="form-group">
+                                        <label for="">{{ field.label }}</label>
+                                        {{ field }}
+                                    </div>
+                                {% endfor %}
+                            </fieldset>
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-outline-success">Add Subject</button>
+                            </div>
+                        </form>
+                    </div>
+                </div> 
+            </div> 
+            <!-- subject creation form done -->
+        </div>
+        <div class="col-md-9">
+            <div class="container-fluid">
+                <h2 class="text-info text-center">Subjects Offered.</h2><hr>
+                <!-- Display all the subjects and their papers at both levels -->
+                <table class="table table-bordered">
+                    <thead class="text-center">
+                        <th>Subject Name</th>
+                        <th>O'Level Papers</th>
+                        <th>A'Level Papers</th>
+                        <th>Actions</th>
+                    </thead>
+                    <!-- table head ends -->
+                    <tbody>
+                        {% for subject in subjects %}
+                        <!-- for each of the subject -->
+                        <tr>
+                            <td>{{ subject.name }}</td>
+                            <td>
+                                {% if subject.olevel %}
+                                    {% for paper in subject.olevel_papers %}
+                                        <span class="">
+                                            <a href="{% url 'edit_paper' paper.id %}" class="btn btn-sm btn-outline-info">
+                                                <svg class="bi bi-pencil-square" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M15.502 1.94a.5.5 0 010 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 01.707 0l1.293 1.293zm-1.75 2.456l-2-2L4.939 9.21a.5.5 0 00-.121.196l-.805 2.414a.25.25 0 00.316.316l2.414-.805a.5.5 0 00.196-.12l6.813-6.814z"/>
+                                                    <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 002.5 15h11a1.5 1.5 0 001.5-1.5v-6a.5.5 0 00-1 0v6a.5.5 0 01-.5.5h-11a.5.5 0 01-.5-.5v-11a.5.5 0 01.5-.5H9a.5.5 0 000-1H2.5A1.5 1.5 0 001 2.5v11z" clip-rule="evenodd"/>
+                                                </svg>
+                                            </a>
+                                        </span>
+                                        <span class="">
+                                            <a href="{% url 'delete_paper' paper.id %}" class="btn btn-sm btn-outline-danger">
+                                                <svg class="bi bi-trash-fill" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                                    <path fill-rule="evenodd" d="M2.5 1a1 1 0 00-1 1v1a1 1 0 001 1H3v9a2 2 0 002 2h6a2 2 0 002-2V4h.5a1 1 0 001-1V2a1 1 0 00-1-1H10a1 1 0 00-1-1H7a1 1 0 00-1 1H2.5zm3 4a.5.5 0 01.5.5v7a.5.5 0 01-1 0v-7a.5.5 0 01.5-.5zM8 5a.5.5 0 01.5.5v7a.5.5 0 01-1 0v-7A.5.5 0 018 5zm3 .5a.5.5 0 00-1 0v7a.5.5 0 001 0v-7z" clip-rule="evenodd"/>
+                                                </svg>
+                                            </a>
+                                        </span>
+                                        {{ paper.name }} {{ subject.olevel_code }}/{{ paper.code }} <br/> 
+                                    {% endfor %}
+                                    <hr>
+                                    <a href="{% url 'add_paper' subject.id 'Olevel' %}" class="btn btn-sm btn-outline-info whole-width">Add O'level paper to {{ subject.name }}</a>
+                                {% endif %}
+                            </td>
+                            <td>
+                                {% if subject.alevel %}
+                                    {% for paper in subject.alevel_papers %}
+                                        <span class="">
+                                            <a href="{% url 'edit_paper' paper.id %}" class="btn btn-sm btn-outline-info">
+                                                <svg class="bi bi-pencil-square" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M15.502 1.94a.5.5 0 010 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 01.707 0l1.293 1.293zm-1.75 2.456l-2-2L4.939 9.21a.5.5 0 00-.121.196l-.805 2.414a.25.25 0 00.316.316l2.414-.805a.5.5 0 00.196-.12l6.813-6.814z"/>
+                                                    <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 002.5 15h11a1.5 1.5 0 001.5-1.5v-6a.5.5 0 00-1 0v6a.5.5 0 01-.5.5h-11a.5.5 0 01-.5-.5v-11a.5.5 0 01.5-.5H9a.5.5 0 000-1H2.5A1.5 1.5 0 001 2.5v11z" clip-rule="evenodd"/>
+                                                </svg>
+                                            </a>
+                                        </span>
+                                        <span class="">
+                                            <a href="{% url 'delete_paper' paper.id %}" class="btn btn-sm btn-outline-danger">
+                                                <svg class="bi bi-trash-fill" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                                    <path fill-rule="evenodd" d="M2.5 1a1 1 0 00-1 1v1a1 1 0 001 1H3v9a2 2 0 002 2h6a2 2 0 002-2V4h.5a1 1 0 001-1V2a1 1 0 00-1-1H10a1 1 0 00-1-1H7a1 1 0 00-1 1H2.5zm3 4a.5.5 0 01.5.5v7a.5.5 0 01-1 0v-7a.5.5 0 01.5-.5zM8 5a.5.5 0 01.5.5v7a.5.5 0 01-1 0v-7A.5.5 0 018 5zm3 .5a.5.5 0 00-1 0v7a.5.5 0 001 0v-7z" clip-rule="evenodd"/>
+                                                </svg>
+                                            </a>
+                                        </span>
+                                        {{ paper.name }} {{ subject.alevel_code }}/{{ paper.code }}
+                                        <br> 
+                                    {% endfor %}<hr>
+                                    <a href="{% url 'add_paper' subject.id 'Alevel' %}" class="btn btn-sm btn-outline-info whole-width">Add A'level paper to {{ subject.name }}</a>
+                                {% endif %}
+                            </td>
+                            <td>
+                                <div class="h-gird-2">
+                                    <a href="{% url 'update_subject' subject.id %}" class="btn btn-sm btn-outline-warning">
+                                        <svg class="bi bi-pencil-square" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M15.502 1.94a.5.5 0 010 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 01.707 0l1.293 1.293zm-1.75 2.456l-2-2L4.939 9.21a.5.5 0 00-.121.196l-.805 2.414a.25.25 0 00.316.316l2.414-.805a.5.5 0 00.196-.12l6.813-6.814z"/>
+                                            <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 002.5 15h11a1.5 1.5 0 001.5-1.5v-6a.5.5 0 00-1 0v6a.5.5 0 01-.5.5h-11a.5.5 0 01-.5-.5v-11a.5.5 0 01.5-.5H9a.5.5 0 000-1H2.5A1.5 1.5 0 001 2.5v11z" clip-rule="evenodd"/>
+                                        </svg>
+                                        Update
+                                    </a>
+                                    <a href="{% url 'delete_subject' subject.id %}" class="btn btn-sm btn-outline-danger">
+                                        <svg class="bi bi-trash-fill" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                            <path fill-rule="evenodd" d="M2.5 1a1 1 0 00-1 1v1a1 1 0 001 1H3v9a2 2 0 002 2h6a2 2 0 002-2V4h.5a1 1 0 001-1V2a1 1 0 00-1-1H10a1 1 0 00-1-1H7a1 1 0 00-1 1H2.5zm3 4a.5.5 0 01.5.5v7a.5.5 0 01-1 0v-7a.5.5 0 01.5-.5zM8 5a.5.5 0 01.5.5v7a.5.5 0 01-1 0v-7A.5.5 0 018 5zm3 .5a.5.5 0 00-1 0v7a.5.5 0 001 0v-7z" clip-rule="evenodd"/>
+                                        </svg>
+                                        Delete
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                <!-- End display process -->
+            </div>
+        </div>
+    </div>
+{% endblock page %}
+
+{% block javascript %}
+<!-- the script to add a class to inputs and or selects -->
+    <script>
+        setName('input');
+        setName('select');
+        
+        function setName(elem) {
+            arr = document.getElementsByTagName(elem);
+            for (let i = 0; i < arr.length; i++){
+                const element = arr[i];
+                // if the input type is text or password
+                if(element.type === 'text' || element.type === 'password'){
+                    element.className = 'form-control';
+                }
+            }
+        }
+    </script>
+{% endblock javascript %}
+

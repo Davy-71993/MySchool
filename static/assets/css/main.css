@@ -1,0 +1,37 @@
+.field-wrapper.focused label {
+    transition: all .2s linear;
+    top: -20px;
+    background: #fff;
+    color: teal;
+} 
+
+.auto-animate{
+    transition: all .2s linear;
+    top: -20px;
+}
+
+label {
+    position: relative;
+    white-space: nowrap;
+    overflow: hidden;
+    font-size: 1em;
+    position: absolute;
+    top: 0px;
+    display: inline-block;
+    margin: 8px 5px;
+    line-height: 1.4em;
+    padding: 0 10px;
+    transition: all .2s linear;
+    text-transform: capitalize;
+}
+
+input[type="text"],
+input[type="file"],
+select,
+input[type="email"],
+input[type="password"]{
+    padding: 10px;
+    width: 100%;
+    border: 1px solid #5d8fb1;
+    background-color: transparent;
+}

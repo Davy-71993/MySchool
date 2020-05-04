@@ -1,0 +1,112 @@
+
+<!-- 
+    The home page extends the base html.
+    Then all other pages in the mainapp except login, signup, base (which is being extented) and the home page itself should extend this page.
+    This is to avail the navigation to the mainapp
+ -->
+
+{% extends 'mainapp/base.html' %}
+{% block style %}
+{% endblock style %}
+{% block content %}
+  <div class="row">
+      <div class="col-md-3 sider shadowed">
+        <h2 class="card-title text-center">Systems</h2><hr>
+        <div class="accordion" id="accordionExample">
+            <div class="card">
+              <button class="btn card-header" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                Registration
+              </button>
+              <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+                <div class="card-body">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item"><a href="{% url 'register_student' %}" class="btn-link">Students</a></li>
+                        <li class="list-group-item"><a href="#" class="btn-link">Staff</a></li>
+                        <li class="list-group-item"><a href="#" class="btn-link">Vistors</a></li>
+                    </ul>
+                </div>
+              </div>
+            </div>
+
+            <div class="card">
+              <button class="btn card-header" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                Inventory/Store
+              </button>
+              <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                <div class="card-body">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item"><a href="#" class="btn-link">View Inventory</a></li>
+                        <li class="list-group-item"><a href="#" class="btn-link">Add Item</a></li>
+                        <li class="list-group-item"><a href="#" class="btn-link">Add Payment</a></li>
+                    </ul>
+                </div>
+              </div>
+            </div>
+
+            <div class="card">
+              <button class="btn card-header" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                Office of the DOS
+              </button>
+              <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+                <div class="card-body">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item"><a href="#" class="btn-link">Time Table</a></li>
+                        <li class="list-group-item"><a href="{% url 'creat_marklist' %}" class="btn-link">Mark Lists</a></li>
+                        <li class="list-group-item"><a href="#" class="btn-link">Remedials</a></li>
+                    </ul>
+                </div>
+              </div>
+            </div>
+
+            <div class="card"> 
+              <button class="btn card-header" type="button" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseTwo">
+                Settings
+              </button> 
+              <div id="collapseFour" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                <div class="card-body">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item"><a href="{% url 'subjects' %}" class="btn-link">Subjetcts Offered</a></li>
+                        <li class="list-group-item"><a href="#" class="btn-link">Papers per subject offered</a></li>
+                        <li class="list-group-item"><a href="#" class="btn-link">Streaming</a></li>
+                    </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        <h2 class="card-title text-center">Dashboards</h2><hr>
+        <div class="card">
+          <div class="card-header">
+            <a href="{% url 'home' %}">Admin</a>
+          </div>
+          <div class="card-header">
+            <a href="#">Teachers</a>
+          </div>
+          <div class="card-header">
+            <a href="{% url 'students' %}">Students</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-9 main">
+        {% block page %}
+          <div class="conatiner">
+            <div class="form-container">
+              <div class="wrapper col-md-12">
+                <div class="card">
+                  <div class="card-header">
+                    <h1 class="text-center text-info">Welcom again, Select where to go next</h1>
+                  </div>
+                  <div class="card-body">
+                    <a href="{% url 'register_student' %}" class="text-center">Admit Students</a><hr>
+                    <a href="{% url 'students' %}" class="text-center">View Students Data</a><hr>
+                    <a href="#" class="text-center">View the Payments</a><hr>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        {% endblock page %}
+      </div>
+  </div>
+{% endblock content %}

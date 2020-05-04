@@ -1,0 +1,46 @@
+{% extends 'mainapp/home.html' %}
+
+{% block page %}
+    <div class="container">
+        <div class="form-container">
+            <div class="wrapper">
+                <h1 class="text-center text-info">Your adding a new {{ px }} paper to {{ subject.name }}</h1>
+
+                <form action="" method="POST">
+                    {% csrf_token %}
+                    <fieldset>
+                        {% for field in paper_form %}
+                        <div class="form-group">
+                            <label for="">{{ field.label }}</label>
+                            {{ field }}
+                        </div>
+                        {% endfor %}
+                    </fieldset>
+
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-outline-success whole-width">Add Paper</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock page %}
+
+
+{% block javascript %}
+    <script>
+        setName('input');
+        setName('select')
+        
+        function setName(elem) {
+            arr = document.getElementsByTagName(elem);
+            for (let i = 0; i < arr.length; i++) {
+                const element = arr[i];
+                if(element.type !== 'submit'){
+                    element.className = 'form-control';
+                }
+            }
+        }
+    </script>
+{% endblock javascript %}
+
